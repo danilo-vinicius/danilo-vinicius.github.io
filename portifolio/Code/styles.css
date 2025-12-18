@@ -169,8 +169,8 @@ header {
 }
 
 .profile-photo {
-    width: 180px;
-    height: 180px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     border: 4px solid #C6A46E;
     object-fit: cover;
@@ -200,7 +200,7 @@ header {
 
 @keyframes blink { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
 
-.button-div > a {
+.button-div > a , .btn-secondary {
     display: inline-block;
     padding: 12px 30px;
     margin: 0 10px;
@@ -218,14 +218,15 @@ header {
     color: #C6A46E;
 }
 
-.btn-secondary {
+/*.btn-secondary {
     background: transparent !important;
     color: #C6A46E !important;
     border: none !important;
     box-shadow: none !important;
-}
+}*/
 .btn-secondary:hover {
-    text-shadow: 0 0 10px #C6A46E;
+    background-color: transparent;
+    color: #C6A46E;
 }
 
 /* =========================================
@@ -299,7 +300,15 @@ main {
 .edu-card h3 { color: #C6A46E; margin-top: 0; }
 
 #skills { padding: 40px 20px 80px 20px; text-align: center; }
-.skills-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 0 auto; }
+.skills-grid { 
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; gap: 20px;
+    max-width: 1000px; 
+    margin: 0 auto; 
+    padding-top: 45px;
+
+}
 
 .skill-card {
     background: #2E2E2E; border: 1px solid #3d3d3d;
