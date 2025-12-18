@@ -8,17 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Só roda se o elemento de digitação existir na página
     if (typeWriterElement) {
         const phrases = [
+            "Ciência de Dados",
             "Análise de Dados",
             "Automação em Python",
-            "Dashboards Power BI",
-            "Segurança Eletrônica",
+            "Business Intelligence",
+            "Automação de Fluxos e Processos",
             "Soluções em TI"
         ];
 
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
-        let typeSpeed = 100;
+        let typeSpeed = 150;
 
         function type() {
             const currentPhrase = phrases[phraseIndex];
@@ -220,3 +221,4 @@ document.addEventListener('click', (e) => {
         toggleMenu();
     }
 });
+
