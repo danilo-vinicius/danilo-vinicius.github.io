@@ -1,46 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    /* =========================================
+       1. TYPEWRITER EFFECT (Efeito de Digitação)
+       ========================================= */
+    const typeWriterElement = document.querySelector('.typewriter-text');
     
-    // --- FUNÇÃO 1: EFEITO DE DIGITAÇÃO (Roda só na Home) ---
-    const textElement = document.querySelector(".typing-effect");
-    if (textElement) {
+    // Só roda se o elemento de digitação existir na página
+    if (typeWriterElement) {
         const phrases = [
-            "Ciência de Dados", "Big Data Analytics", 
-            "Automação de Processos", "Business Intelligence"
+            "Análise de Dados",
+            "Automação em Python",
+            "Dashboards Power BI",
+            "Segurança Eletrônica",
+            "Soluções em TI"
         ];
-        let phraseIndex = 0; 
-        let charIndex = 0; 
-        let isDeleting = false; 
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
         let typeSpeed = 100;
 
         function type() {
             const currentPhrase = phrases[phraseIndex];
+
             if (isDeleting) {
-                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--; typeSpeed = 50;
+                typeWriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
             } else {
-                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++; typeSpeed = 100;
+                typeWriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
             }
 
             if (!isDeleting && charIndex === currentPhrase.length) {
-                isDeleting = true; typeSpeed = 2000;
+                isDeleting = true;
+                typeSpeed = 2000; // Pausa lendo
             } else if (isDeleting && charIndex === 0) {
-                isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500;
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; // Pausa antes do próximo
             }
+
             setTimeout(type, typeSpeed);
         }
+
+        // Inicia a função imediatamente
         type();
     }
 
-    // --- FUNÇÃO 2: PAGINAÇÃO DINÂMICA (Roda só em Projetos) ---
+
+    /* =========================================
+       2. PAGINAÇÃO DINÂMICA (Página Projetos)
+       ========================================= */
     const projectContainer = document.getElementById('project-list');
     const paginationContainer = document.getElementById('pagination-controls');
 
     if (projectContainer && paginationContainer) {
-        const cardsPerPage = 3; // Mude aqui para exibir 3, 6 ou 9 por vez
+        const cardsPerPage = 3;
         const cards = Array.from(projectContainer.getElementsByClassName('project-card'));
 
-        // Só cria paginação se tiver cards suficientes
         if (cards.length > cardsPerPage) {
             const totalPages = Math.ceil(cards.length / cardsPerPage);
             let currentPage = 1;
@@ -52,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 cards.forEach((card, index) => {
                     if (index >= start && index < end) {
                         card.style.display = 'flex';
-                        // Efeito suave
                         card.style.opacity = '0';
                         setTimeout(() => card.style.opacity = '1', 100);
                     } else {
@@ -78,122 +96,127 @@ document.addEventListener('DOMContentLoaded', () => {
                     paginationContainer.appendChild(btn);
                 }
             }
-
-            // Inicia
             displayPage(1);
         }
     }
+
+
+    /* =========================================
+       3. FILTRO DE PROJETOS
+       ========================================= */
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.classList.remove('hide');
+                        card.classList.add('show');
+                        // Se estiver usando paginação junto com filtro, precisaria resetar o display aqui,
+                        // mas para simplificar, o filtro sobrepõe o display: flex
+                        card.style.display = 'flex'; 
+                    } else {
+                        card.classList.add('hide');
+                        card.classList.remove('show');
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+
+    /* =========================================
+       4. CARROSSEL AUTOMÁTICO (Página Sobre)
+       ========================================= */
+    const track = document.querySelector('.carousel-track');
+    
+    // Verifica se o carrossel existe antes de rodar a lógica
+    if (track) {
+        const slides = Array.from(track.children);
+        const dots = document.querySelectorAll('.nav-dot');
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        const updateSlide = (index) => {
+            track.style.transform = 'translateX(-' + (index * 100) + '%)';
+            dots.forEach(dot => dot.classList.remove('current-slide'));
+            if(dots[index]) dots[index].classList.add('current-slide');
+            currentSlideIndex = index;
+        };
+
+        const nextSlide = () => {
+            let nextIndex = currentSlideIndex + 1;
+            if (nextIndex >= slides.length) {
+                nextIndex = 0;
+            }
+            updateSlide(nextIndex);
+        };
+
+        const startAutoSlide = () => {
+            slideInterval = setInterval(nextSlide, 3000);
+        };
+
+        const stopAutoSlide = () => {
+            clearInterval(slideInterval);
+        };
+
+        startAutoSlide();
+
+        const carouselContainer = document.querySelector('.carousel-container');
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+            carouselContainer.addEventListener('mouseleave', startAutoSlide);
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopAutoSlide();
+                updateSlide(index);
+            });
+        });
+    }
+
 });
 
-// --- MENU MOBILE ---
+/* =========================================
+   5. MENU MOBILE (Funções Globais)
+   ========================================= */
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     const menuIcon = document.querySelector('.mobile-menu-icon i');
 
-    // Troca a classe .active na lista (abre/fecha)
-    navLinks.classList.toggle('active');
-
-    // Troca o ícone: Se for 'fa-bars', vira 'fa-times' (X), e vice-versa
-    if (navLinks.classList.contains('active')) {
-        menuIcon.classList.remove('fa-bars');
-        menuIcon.classList.add('fa-times');
-    } else {
-        menuIcon.classList.remove('fa-times');
-        menuIcon.classList.add('fa-bars');
+    if (navLinks) {
+        navLinks.classList.toggle('active');
+        
+        if (menuIcon) {
+            if (navLinks.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
     }
 }
 
-// Fecha o menu se clicar fora dele (Opcional, mas bom para UX)
+// Fecha o menu ao clicar fora
 document.addEventListener('click', (e) => {
     const navLinks = document.querySelector('.nav-links');
     const menuIconContainer = document.querySelector('.mobile-menu-icon');
     
-    // Se o menu estiver aberto E o clique NÃO foi no menu NEM no ícone
-    if (navLinks.classList.contains('active') && 
+    if (navLinks && navLinks.classList.contains('active') && 
         !navLinks.contains(e.target) && 
-        !menuIconContainer.contains(e.target)) {
+        menuIconContainer && !menuIconContainer.contains(e.target)) {
         
-        toggleMenu(); // Fecha o menu
+        toggleMenu();
     }
-});
-
-// Filtro de Projetos
-const filterButtons = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
-
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Remove a classe 'active' de todos os botões
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Adiciona 'active' no botão clicado
-        button.classList.add('active');
-
-        const filterValue = button.getAttribute('data-filter');
-
-        projectCards.forEach(card => {
-            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                card.classList.remove('hide');
-                card.classList.add('show');
-            } else {
-                card.classList.add('hide');
-                card.classList.remove('show');
-            }
-        });
-    });
-});
-
-/* =========================================
-   CARROSSEL AUTOMÁTICO
-   ========================================= */
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const dots = document.querySelectorAll('.nav-dot');
-let currentSlideIndex = 0;
-let slideInterval;
-
-// Função para mover o slide
-const updateSlide = (index) => {
-    // Move o trilho para a esquerda (index * 100%)
-    track.style.transform = 'translateX(-' + (index * 100) + '%)';
-    
-    // Atualiza as bolinhas
-    dots.forEach(dot => dot.classList.remove('current-slide'));
-    dots[index].classList.add('current-slide');
-    
-    currentSlideIndex = index;
-};
-
-// Função de Próximo Slide
-const nextSlide = () => {
-    let nextIndex = currentSlideIndex + 1;
-    if (nextIndex >= slides.length) {
-        nextIndex = 0; // Volta para o começo (loop)
-    }
-    updateSlide(nextIndex);
-};
-
-// Iniciar o Loop Automático
-const startAutoSlide = () => {
-    slideInterval = setInterval(nextSlide, 3000); // 3000ms = 3 segundos
-};
-
-const stopAutoSlide = () => {
-    clearInterval(slideInterval);
-};
-
-// Event Listeners
-startAutoSlide(); // Começa assim que carrega
-
-// Pausa quando o mouse está em cima (para ler com calma)
-const carouselContainer = document.querySelector('.carousel-container');
-carouselContainer.addEventListener('mouseenter', stopAutoSlide);
-carouselContainer.addEventListener('mouseleave', startAutoSlide);
-
-// Clique nas bolinhas para navegar manualmente
-dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        stopAutoSlide(); // Para o timer momentaneamente
-        updateSlide(index);
-        // O timer volta ao tirar o mouse do container (evento mouseleave acima)
-    });
 });
