@@ -454,23 +454,85 @@ main {
     margin-bottom: 40px;
 }
 
+/* Configuração do Container Principal */
 #contact-link {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    padding-top: 50px;
+  display: flex;
+  justify-content: center; /* Centraliza os ícones na tela */
+  gap: 20px; /* Espaço entre os botões */
+  padding: 20px;
+  padding-top: 30px;
 }
 
-.icon-div i {
-    color: #C6A46E;
-    transition: 0.3s;
+/* Estilo do Círculo (Link) */
+#contact-link a {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 80px; /* Alinha verticalmente */
+  font-size: 35px; /* Tamanho do ícone (substitui o fa-4x visualmente) */
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+  text-decoration: none; /* Remove sublinhado padrão de links */
 }
 
-.icon-div i:hover {
-    color: #F9F9F9;
-    transform: scale(1.1);
+/* Estilo do Ícone */
+#contact-link a i {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
 }
+
+/* Efeito de Rotação e Cor do Ícone ao passar o mouse */
+#contact-link a:hover i {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+/* O elemento que preenche o fundo (inicialmente escondido embaixo) */
+#contact-link a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: .5s;
+  z-index: 2;
+}
+
+/* Animação de subir o fundo ao passar o mouse */
+#contact-link a:hover:before {
+  top: 0;
+}
+
+/* --- Cores de Fundo Individuais (Preenchemos o botão com a cor da marca) --- */
+
+/* LinkedIn */
+.icon-div-linkedin a:before {
+  background: #0077b5;
+}
+
+/* GitHub */
+.icon-div-github a:before {
+  background: #333333;
+}
+
+/* Email (Vermelho estilo Gmail) */
+.icon-div-email a:before {
+  background: #dd4b39;
+}
+
+/* WhatsApp */
+.icon-div-wpp a:before {
+  background: #25D366;
+}
+
 
 footer {
     width: 100%;
@@ -496,6 +558,5 @@ footer h4 { color: #C6A46E; font-size: 0.9rem; margin: 0; }
     
     .projects-grid { grid-template-columns: 1fr; }
     
-    .profile-photo { width: 200px; height: 200px; }
+    .profile-photo { width: 140px; height: 140px; }
 }
-
