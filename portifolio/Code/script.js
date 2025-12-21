@@ -1,6 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================
+       0. TEMA CLARO/ESCURO
+       ========================================= */
+    function loadTheme() {
+        const theme = localStorage.getItem('theme');
+        const icon = document.getElementById('theme-icon');
+        
+        if (theme === 'light') {
+            document.body.classList.add('light-mode');
+            if(icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        } else {
+            document.body.classList.remove('light-mode');
+            if(icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    }
+    
+    // Carrega o tema ao iniciar
+    loadTheme();
+
+    /* =========================================
        1. TYPEWRITER EFFECT (Efeito de Digitação)
        ========================================= */
     const typeWriterElement = document.querySelector('.typewriter-text');
@@ -9,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeWriterElement) {
         const phrases = [
             "Ciência de Dados",
-            "Análise de Dados",
-            "Automação em Python",
             "Business Intelligence",
-            "Automação de Fluxos e Processos",
-            "Soluções em TI"
+            "Engenharia de Dados (ETL)",
+            "Automação com Python",
+            "Análise Preditiva",
+            "Dashboards Estratégicos"
         ];
 
         let phraseIndex = 0;
@@ -120,8 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                         card.classList.remove('hide');
                         card.classList.add('show');
-                        // Se estiver usando paginação junto com filtro, precisaria resetar o display aqui,
-                        // mas para simplificar, o filtro sobrepõe o display: flex
                         card.style.display = 'flex'; 
                     } else {
                         card.classList.add('hide');
@@ -188,8 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =========================================
-   5. MENU MOBILE (Funções Globais)
+   5. FUNÇÕES GLOBAIS (FORA DO DOMContentLoaded)
    ========================================= */
+
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     const menuIcon = document.querySelector('.mobile-menu-icon i');
@@ -209,6 +233,129 @@ function toggleMenu() {
     }
 }
 
+/* =========================================
+   7. SCROLL REVEAL (Animações ao Rolar)
+   ========================================= */
+
+// Inicializa o ScrollReveal (Verifica se a biblioteca carregou)
+if (typeof ScrollReveal !== 'undefined') {
+    
+    const sr = ScrollReveal({
+        origin: 'top',       // De onde o elemento vem (top, bottom, left, right)
+        distance: '50px',    // Distância que ele percorre
+        duration: 1000,      // Duração da animação (ms)
+        delay: 200,          // Atraso antes de começar
+        reset: true          // Se true, anima toda vez que rola (se false, anima só uma vez)
+    });
+
+    /* --- GERAIS --- */
+    // Títulos das seções
+    sr.reveal('.section-title', { delay: 200 });
+    sr.reveal('.section-header', { delay: 200 });
+
+    /* --- HOME --- */
+    sr.reveal('.hero-content h1', { delay: 200 });
+    sr.reveal('.typing-container', { delay: 400 });
+    sr.reveal('.hero-description', { delay: 500 });
+    sr.reveal('.hero-buttons', { delay: 600, origin: 'bottom' });
+    sr.reveal('.tech-ticker-wrapper', { delay: 800, origin: 'bottom' });
+
+    /* --- SOBRE (About) --- */
+    // A imagem vem da esquerda
+    sr.reveal('.hero-image', { origin: 'left', distance: '100px', duration: 1500 });
+    // O texto vem da direita
+    sr.reveal('.hero-text', { origin: 'right', distance: '100px', duration: 1500 });
+    
+    // Stats (Números) - Intervalo cria o efeito "um por um"
+    sr.reveal('.stat-item', { interval: 200, origin: 'bottom' });
+
+    // Timeline (Experiência)
+    sr.reveal('.timeline-item', { interval: 200, origin: 'left' });
+
+    // Educação Cards
+    sr.reveal('.edu-card-premium', { interval: 200, origin: 'bottom' });
+
+    // Skills Dock (Anima o container inteiro para não quebrar o efeito hover do macOS)
+    sr.reveal('.skills-dock', { delay: 300, scale: 0.9 });
+
+    /* --- PROJETOS --- */
+    // Texto do Hero
+    sr.reveal('.proj-hero-content', { scale: 0.9 });
+
+    // Carrossel de Serviços
+    sr.reveal('.carousel-container', { delay: 300, origin: 'bottom' });
+
+    // Passos do Processo (Cards)
+    sr.reveal('.process-card', { 
+        interval: 200,   // Um aparece 200ms depois do outro
+        origin: 'bottom', // Vêm de baixo para cima
+        distance: '50px'
+    });
+
+    // Cards de Projetos (Aparecem em cascata)
+    sr.reveal('.project-card', { interval: 200, origin: 'bottom' });
+    
+    // Contato
+    sr.reveal('.contact-header', { origin: 'top' });
+    sr.reveal('#contact-link', { delay: 400, scale: 0.5 });
+}
+
+/* =========================================
+       6. SMART HIDE NAVBAR (Esconder ao rolar)
+       ========================================= */
+    const navElements = document.querySelectorAll('.fixed-logo, .floating-menu, .theme-floater');
+    
+    // Configuração
+    const scrollThreshold = 100; // Quanto descer para esconder (px)
+    const mouseThreshold = 100;  // Quão perto do topo o mouse precisa estar para mostrar (px)
+
+    // Evento de Rolagem (Scroll)
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        // Se desceu mais que o limite, esconde
+        if (currentScroll > scrollThreshold) {
+            navElements.forEach(el => el.classList.add('nav-hidden'));
+        } else {
+            // Se voltou ao topo, mostra
+            navElements.forEach(el => el.classList.remove('nav-hidden'));
+        }
+    });
+
+    // Evento de Mouse (Para Desktop) - "Chamar" o menu passando o mouse no topo
+    window.addEventListener('mousemove', (e) => {
+        // Se o mouse estiver nos primeiros 100px do topo da tela
+        if (e.clientY < mouseThreshold) {
+            navElements.forEach(el => el.classList.remove('nav-hidden'));
+        }
+        
+        // (Opcional) Se quiser que o menu apareça no mobile ao tocar na parte inferior:
+        // Você precisaria de lógica de 'touchmove', mas geralmente no mobile 
+        // o padrão é mostrar apenas ao rolar um pouco para cima (scroll up).
+    });
+
+// NOVA FUNÇÃO: Trocar Tema
+function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.toggle('light-mode');
+
+    if (body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+        if(icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    } else {
+        localStorage.setItem('theme', 'dark');
+        if(icon) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    }
+}
+
 // Fecha o menu ao clicar fora
 document.addEventListener('click', (e) => {
     const navLinks = document.querySelector('.nav-links');
@@ -217,8 +364,6 @@ document.addEventListener('click', (e) => {
     if (navLinks && navLinks.classList.contains('active') && 
         !navLinks.contains(e.target) && 
         menuIconContainer && !menuIconContainer.contains(e.target)) {
-        
         toggleMenu();
     }
 });
-
