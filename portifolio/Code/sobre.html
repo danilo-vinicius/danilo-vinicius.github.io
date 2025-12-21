@@ -3,45 +3,55 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="portifolio/Code/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;400;700&display=swap" rel="stylesheet">
     <title>Danilo Vinícius | Sobre</title>
   </head>
   <body>
     
-    <header>
-      <nav id="navbar">
-        <div class="nav-logo">
-          <a href="https://danilo-vinicius.github.io/danilo-vinicius/">DV <span style="color: #C6A46E;">|</span> Data Analyst</a>
-        </div>
+    <div class="fixed-logo">
+    <a href="index.html">DV <span class="logo-accent">|</span> Data Analyst</a>
+  </div>
 
-        <div class="mobile-menu-icon" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
-
-        <ul class="nav-links">
-          <a href="sobre.html"><li>Sobre Mim</li></a> 
-          <a href="projetos.html"><li>Projetos</li></a>
-          <a href="contato.html"><li>Contato</li></a>
-        </ul>
-      </nav>
-    </header>
+  <nav class="floating-menu">
     
-    <main>
+    <div class="menu-links left-links">
+      <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+      <a href="sobre.html" class="nav-item"><i class="fas fa-user"></i> Sobre</a>
+    </div>
+
+    <div class="menu-center-icon">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="menu-links right-links">
+      <a href="projetos.html" class="nav-item"><i class="fas fa-project-diagram"></i> Projetos</a>
+      <a href="contato.html" class="nav-item"><i class="fas fa-envelope"></i> Contato</a>
+    </div>
+
+  </nav>
+
+<div class="theme-floater" onclick="toggleTheme()">
+  <i class="fas fa-moon" id="theme-icon"></i>
+</div>
+    
+  <main>
+  
   <section id="sobre-hero">
     <div class="hero-container">
       <div class="hero-image">
         <img src="https://github.com/user-attachments/assets/8465b79f-71aa-46ef-8746-ef12bceb366c" alt="Danilo Vinícius">
       </div>
+      
       <div class="hero-text">
-        <span class="badge">Analista de Dados & Suporte</span>
-        <h1>Olá, eu sou o Danilo</h1>
+        <span class="badge-gold">Data Scientist & BI Analyst</span>
+        <h1>Dados: A base da minha trajetória</h1>
         <p>
-          Transformo dados complexos em decisões estratégicas. Com background híbrido em <strong>Suporte Técnico</strong> e <strong>Ciência de Dados</strong>, possuo uma visão 360º que vai da infraestrutura à inteligência de negócio.
+          Minha carreira não migrou para a área de dados, ela <strong>começou nos dados</strong>. Iniciei na <strong>EBSERH</strong> transformando bases brutas em indicadores de progresso educacional e elevei o nível de complexidade atuando com BI estratégico na <strong>Presidência da República</strong>.
         </p>
         <p>
-          Já atuei em grandes órgãos como <strong>Presidência da República</strong> e <strong>EBSERH</strong>. Atualmente, otimizo processos e crio soluções de BI na <strong>Brasfort</strong>.
+          Hoje, na <strong>Brasfort</strong>, utilizo essa expertise para revolucionar processos operacionais. Aplico <strong>Python</strong> e <strong>Power BI</strong> para criar soluções de automação e inteligência, provando na prática que a cultura <em>Data-Driven</em> gera valor em qualquer ambiente.
         </p>
         
         <div class="hero-btns">
@@ -56,15 +66,15 @@
 
   <section id="stats-bar">
     <div class="stat-item">
-      <h2>3+</h2>
-      <p>Anos de Experiência</p>
+      <h2>+4</h2>
+      <p>Anos em Data Analytics</p>
     </div>
     <div class="stat-item">
-      <h2>15+</h2>
+      <h2>+15</h2>
       <p>Projetos de BI</p>
     </div>
     <div class="stat-item">
-      <h2>5+</h2>
+      <h2>+5</h2>
       <p>Ferramentas Dominadas</p>
     </div>
   </section>
@@ -129,23 +139,44 @@
 
   <section id="formacao">
     <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Formação Acadêmica</h2>
+    
     <div class="education-container">
       
-      <div class="edu-card-premium">
-        <div class="edu-icon"><i class="fas fa-university"></i></div>
-        <div class="edu-info">
+      <div class="edu-card-premium running">
+        <div class="card-glow"></div> <div class="edu-header">
+          <div class="edu-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="edu-badge">Em Andamento <span class="pulse"></span></div>
+        </div>
+
+        <div class="edu-content">
           <h3>Pós-Graduação em Data Science</h3>
-          <p>Ciência de Dados e Big Data Analytics</p>
-          <span class="edu-place">Estácio | Previsão: Ago/2026</span>
+          <p class="edu-sub">Ciência de Dados e Big Data Analytics</p>
+          <div class="edu-meta">
+            <span><i class="fas fa-university"></i> Estácio</span>
+            <span><i class="fas fa-calendar-alt"></i> Previsão: Ago/2026</span>
+          </div>
         </div>
       </div>
 
-      <div class="edu-card-premium">
-        <div class="edu-icon"><i class="fas fa-laptop-code"></i></div>
-        <div class="edu-info">
+      <div class="edu-card-premium completed">
+        <div class="card-glow"></div>
+        
+        <div class="edu-header">
+          <div class="edu-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="edu-badge done">Concluído</div>
+        </div>
+
+        <div class="edu-content">
           <h3>Graduação em ADS</h3>
-          <p>Análise e Desenvolvimento de Sistemas</p>
-          <span class="edu-place">Universidade Católica de Brasília | Jun/2025</span>
+          <p class="edu-sub">Análise e Desenvolvimento de Sistemas</p>
+          <div class="edu-meta">
+            <span><i class="fas fa-university"></i> UCB - Católica</span>
+            <span><i class="fas fa-check-circle"></i> Jun/2025</span>
+          </div>
         </div>
       </div>
 
@@ -155,23 +186,55 @@
   <hr class="section-divider">
 
   <section id="skills">
-    <h2 class="section-title">Tech Stack</h2>
-    <div class="skills-wrapper">
-        <div class="skill-box"><i class="fab fa-python" style="color:#ffe873;"></i> <span>Python</span></div>
-        <div class="skill-box"><i class="fas fa-database" style="color:#0077b5;"></i> <span>SQL</span></div>
-        <div class="skill-box"><i class="fas fa-chart-bar" style="color:#f2c811;"></i> <span>Power BI</span></div>
-        <div class="skill-box"><i class="fas fa-file-excel" style="color:#217346;"></i> <span>Excel</span></div>
-        <div class="skill-box"><i class="fas fa-robot" style="color:#C6A46E;"></i> <span>Automação</span></div>
-        <div class="skill-box"><i class="fab fa-git-alt" style="color:#f14e32;"></i> <span>Git</span></div>
+    <div class="skills-intro">
+      <h2 class="section-title">Tech Stack & Aprendizado</h2>
+      <p class="skills-desc">
+        Minha caixa de ferramentas é focada em <strong>autonomia</strong> e <strong>escalabilidade</strong>. 
+        Não apenas conheço a sintaxe, mas entendo a arquitetura necessária para integrar essas tecnologias em soluções robustas.
+      </p>
+      
+      <div class="skills-tags">
+        <span class="tag">📊 Visualização de Dados</span>
+        <span class="tag">⚙️ Engenharia de Dados (ETL)</span>
+        <span class="tag">🤖 Automação de Processos</span>
+        <span class="tag">🐍 Scripting Avançado</span>
+      </div>
+    </div>
+    
+    <div class="dock-wrapper">
+        <div class="skills-dock">
+           <div class="dock-item" style="--sk-color: #ffe873;">
+            <div class="dock-icon"><i class="fab fa-python"></i></div>
+            <div class="dock-label"><strong>Python</strong><span>Pandas & Auto</span></div>
+          </div>
+          <div class="dock-item" style="--sk-color: #0077b5;">
+            <div class="dock-icon"><i class="fas fa-database"></i></div>
+            <div class="dock-label"><strong>SQL</strong><span>Queries & Views</span></div>
+          </div>
+          <div class="dock-item" style="--sk-color: #f2c811;">
+            <div class="dock-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="dock-label"><strong>Power BI</strong><span>DAX & Storytelling</span></div>
+          </div>
+          <div class="dock-item" style="--sk-color: #217346;">
+            <div class="dock-icon"><i class="fas fa-file-excel"></i></div>
+            <div class="dock-label"><strong>Excel</strong><span>VBA & Power Query</span></div>
+          </div>
+          <div class="dock-item" style="--sk-color: #C6A46E;">
+            <div class="dock-icon"><i class="fas fa-robot"></i></div>
+            <div class="dock-label"><strong>Power Automate</strong><span>Fluxos Cloud</span></div>
+          </div>
+          <div class="dock-item" style="--sk-color: #f14e32;">
+            <div class="dock-icon"><i class="fab fa-git-alt"></i></div>
+            <div class="dock-label"><strong>Git</strong><span>Versionamento</span></div>
+          </div>
+        </div>
     </div>
   </section>
 
 </main>
+    <script src="https://unpkg.com/scrollreveal"></script>
 
-    <script src="script.js"></script>
+    <script src="portifolio/Code/script.js"></script>
   </body>
 
 </html>
-
-
-
