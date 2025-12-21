@@ -10,61 +10,76 @@
   </head>
   <body>
     
-    <header>
-      <nav id="navbar">
-        <div class="nav-logo">
-          <a href="https://danilo-vinicius.github.io/danilo-vinicius/">DV <span style="color: #C6A46E;">|</span> Data Analyst</a>
-        </div>
+    <div class="fixed-logo">
+    <a href="index.html">DV <span class="logo-accent">|</span> Data Analyst</a>
+  </div>
 
-        <div class="mobile-menu-icon" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
+  <nav class="floating-menu">
+    
+    <div class="menu-links left-links">
+      <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+      <a href="sobre.html" class="nav-item"><i class="fas fa-user"></i> Sobre</a>
+    </div>
 
-        <ul class="nav-links">
-          <a href="sobre.html"><li>Sobre</li></a>
-          <a href="projetos.html"><li>Projetos</li></a>
-          <a href="contato.html" style="color: #C6A46E;"><li>Contato</li></a> </ul>
-      </nav>
-    </header>
+    <div class="menu-center-icon">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="menu-links right-links">
+      <a href="projetos.html" class="nav-item"><i class="fas fa-project-diagram"></i> Projetos</a>
+      <a href="contato.html" class="nav-item"><i class="fas fa-envelope"></i> Contato</a>
+    </div>
+
+  </nav>
+
+<div class="theme-floater" onclick="toggleTheme()">
+  <i class="fas fa-moon" id="theme-icon"></i>
+</div>
     
     <main>
-      <section id="contact">
-        
-        <div class="contact-header">
-          <h3>Vamos conversar?</h3>
-          <p>Estou disponível para projetos de dados, consultorias em Power BI e novas oportunidades profissionais.</p>
-        </div>
-        
-        <div id="contact-link">
-          
-          <div class="icon-div-linkedin" title="LinkedIn">
-            <a href="https://www.linkedin.com/in/danilovinícius57" target="_blank">
-              <i class="fab fa-linkedin-in icon"></i>
-            </a>
-          </div>
-          
-          <div class="icon-div-github" title="GitHub">
-            <a href="https://github.com/danilo-vinicius" target="_blank">
-              <i class="fa-brands fa-github"></i>
-            </a>
-          </div>
-          
-          <div class="icon-div-email" title="Enviar E-mail">
-            <a href="mailto:danilovinicius570@gmail.com">
-              <i class="fa-solid fa-envelope icon"></i>
-            </a>
-          </div>
+  <section id="contact">
+    
+    <div class="contact-header">
+      <h3>Vamos transformar dados em resultados?</h3>
+      
+      <p>
+        Estou em busca de oportunidades desafiadoras em <strong>Análise de Dados</strong>, <strong>Ciência de Dados</strong>, <strong>Engenharia de Dados (ETL)</strong> e <strong>Business Intelligence</strong>.
+      </p>
+      <p style="margin-top: 10px; font-size: 1rem; opacity: 0.8;">
+        Se você precisa de alguém para automatizar processos, criar painéis estratégicos ou descobrir insights ocultos, conecte-se comigo pelos canais abaixo.
+      </p>
+    </div>
+    
+    <div id="contact-link">
+      
+      <div class="icon-div-linkedin" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/danilovinícius57" target="_blank">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+      
+      <div class="icon-div-github" title="GitHub">
+        <a href="https://github.com/danilo-vinicius" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      
+      <div class="icon-div-email" title="Enviar E-mail">
+        <a href="mailto:danilovinicius570@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
 
-          <div class="icon-div-wpp" title="WhatsApp">
-            <a href="https://wa.me/5561984853715" target="_blank">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-          </div>
+      <div class="icon-div-wpp" title="WhatsApp">
+        <a href="https://wa.me/5561984853715" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
 
-        </div>
+    </div>
 
-      </section>
-    </main>
+  </section>
+</main>
     
     <footer>
       <h4>Desenvolvido por Danilo Vinícius Bastos Torres &copy; 2025</h4>
@@ -72,8 +87,4 @@
 
     <script src="script.js"></script>
   </body>
-
 </html>
-
-
-
