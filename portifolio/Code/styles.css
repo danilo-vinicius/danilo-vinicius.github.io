@@ -2094,6 +2094,17 @@ a { text-decoration: none; transition: 0.3s; }
     color: var(--accent-color) !important;
 }
 
+/* Placeholder Específico para IA (Roxo/Azul Neon) */
+.ai-bg { 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    animation: gradient-pulse 3s infinite alternate; /* Opcional: Faz pulsar */
+}
+
+/* Animação suave para o fundo de IA */
+@keyframes gradient-pulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
 /* =========================================
    CONTATO E FOOTER
    ========================================= */
@@ -2179,3 +2190,4 @@ footer h4 { color: var(--accent-color); font-size: 0.9rem; margin: 0; }
     .step { display: flex; text-align: left; align-items: center; gap: 15px; width: 100%; padding: 0; }
     .step-number { margin: 0; min-width: 50px; height: 50px; font-size: 1rem; }
 }
+
